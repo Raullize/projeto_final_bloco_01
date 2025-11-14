@@ -11,17 +11,15 @@ export function main() {
 
     // Instância do Controller para gerenciar os produtos
     const controller = new ProdutoController()
-    
-    // Produtos mockados
-    const morcegoPro = new Headset(1, "Morcego Pro Wireless", 499.90, "Headset Gamer", "Wireless", true)
-    const panteraPro = new Teclado(2, "Pantera Pro TKL", 349.90, "Teclado Mecânico", "TKL", "Red Switch")
-    const morcegoV2 = new Headset(3, "Morcego V2", 299.90, "Headset Gamer", "Com Fio", true)
-    const panteraEco = new Teclado(4, "Pantera Eco Light", 199.90, "Teclado Membrana", "100%", "Membrana")
-    
-    controller.cadastrar(morcegoPro)
-    controller.cadastrar(panteraPro)
-    controller.cadastrar(morcegoV2)
-    controller.cadastrar(panteraEco)
+
+    // const morcegoPro = new Headset(10, "Morcego Pro Wireless", 499.90, "Headset Gamer", "Wireless", true)
+    // const panteraPro = new Teclado(11, "Pantera Pro TKL", 349.90, "Teclado Mecânico", "TKL", "Red Switch")
+    // const morcegoV2 = new Headset(12, "Morcego V2", 299.90, "Headset Gamer", "Com Fio", true)
+    // const panteraEco = new Teclado(13, "Pantera Eco Light", 199.90, "Teclado Membrana", "100%", "Membrana")
+    // controller.cadastrar(morcegoPro)
+    // controller.cadastrar(panteraPro)
+    // controller.cadastrar(morcegoV2)
+    // controller.cadastrar(panteraEco)
 
     while (true) {
 
@@ -73,8 +71,7 @@ export function main() {
                     console.log("Digite a conectividade (Wireless/Com Fio):")
                     let conectividade = readlinesync.question("")
                     
-                    console.log("Possui RGB? (s/n):")
-                    let possuiRGB = readlinesync.question("").toLowerCase() === 's'
+                    let possuiRGB = readlinesync.keyInYNStrict("Possui RGB?")
                     
                     let headset = new Headset(id, nome, preco, "Headset Gamer", conectividade, possuiRGB)
                     controller.cadastrar(headset)
@@ -138,8 +135,7 @@ export function main() {
                         console.log("Digite a nova conectividade (Wireless/Com Fio):")
                         let novaConectividade = readlinesync.question("")
                         
-                        console.log("Possui RGB? (s/n):")
-                        let novoRGB = readlinesync.question("").toLowerCase() === 's'
+                        let novoRGB = readlinesync.keyInYNStrict("Possui RGB?")
                         
                         produtoExistente.conectividade = novaConectividade
                         produtoExistente.possuiRGB = novoRGB
@@ -170,7 +166,24 @@ export function main() {
                 console.log("Digite o ID do produto que deseja apagar:")
                 let idApagar = readlinesync.questionInt("")
                 
-                controller.deletar(idApagar)
+                let produtoApagar = controller.buscarNoArray(idApagar)
+                
+                if (produtoApagar != null) {
+                    console.log("\nProduto encontrado:")
+                    produtoApagar.visualizar()
+                    
+                    console.log("\nTem certeza que deseja apagar este produto? (s/n):")
+                    let confirmacao = readlinesync.question("").toLowerCase()
+                    
+                    if (confirmacao === 's') {
+                        controller.deletar(idApagar)
+                    } else {
+                        console.log(colors.fg.yellow, "Operação cancelada. O produto não foi apagado.", colors.reset)
+                    }
+                    
+                } else {
+                    console.log(colors.fg.red, "Produto não encontrado!", colors.reset)
+                }
                 
                 keyPress()
                 break
