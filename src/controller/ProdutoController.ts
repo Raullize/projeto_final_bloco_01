@@ -30,11 +30,17 @@ export class ProdutoController implements ProdutoRepository {
     }
 
     cadastrar(produto: Produto): void {
+        if (produto.preco <= 0) {
+            throw new Error("Preço do produto deve ser maior que 0")
+        }
         this.listaProdutos.push(produto)
         console.log(colors.fg.green, "\nProduto \"" + produto.nome + "\" foi cadastrado com sucesso!", colors.reset)
     }
 
     atualizar(produto: Produto): void {
+        if (produto.preco <= 0) {
+            throw new Error("Preço do produto deve ser maior que 0")
+        }
         let buscaProduto = this.buscarNoArray(produto.id)
 
         if (buscaProduto != null) {
