@@ -1,10 +1,24 @@
 import readlinesync = require("readline-sync")
 import { colors } from './src/util/Colors'
+import { Headset } from './src/model/Headset'
+import { Teclado } from './src/model/Teclado'
 
 export function main() {
 
     // Variaveis Auxiliares
     let opcao: number
+
+    // Produtos mockados para teste
+    const morcegoPro = new Headset(1, "Morcego Pro Wireless", 499.90, "Headset Gamer", "Wireless", true)
+    const panteraPro = new Teclado(2, "Pantera Pro TKL", 349.90, "Teclado Mecânico", "TKL", "Red Switch")
+    const morcegoV2 = new Headset(3, "Morcego V2", 299.90, "Headset Gamer", "Com Fio", true)
+    const panteraEco = new Teclado(4, "Pantera Eco Light", 199.90, "Teclado Membrana", "100%", "Membrana")
+
+    // Exibir produtos mockados
+    morcegoPro.visualizar()
+    panteraPro.visualizar()
+    morcegoV2.visualizar()
+    panteraEco.visualizar()
 
     while (true) {
 
