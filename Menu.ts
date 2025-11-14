@@ -15,22 +15,21 @@ export function main() {
         console.log("                                                     ")
         console.log("*****************************************************")
         console.log("                                                     ")
-        console.log("            1 - Cadastrar Produto                     ")
-        console.log("            2 - Listar todos os Produtos              ")
+        console.log("            1 - Cadastrar Produto                    ")
+        console.log("            2 - Listar todos os Produtos             ")
         console.log("            3 - Buscar Produto por ID                ")
         console.log("            4 - Atualizar dados do Produto           ")
         console.log("            5 - Apagar Produto                       ")
         console.log("            0 - Sair                                 ")
         console.log("                                                     ")
-        console.log("*****************************************************")
-        console.log("                                                     ",
-            colors.reset)
+        console.log("*****************************************************"
+            + colors.reset)
 
         console.log("Entre com a opção desejada: ")
         opcao = readlinesync.questionInt("")
 
         if (opcao == 0) {
-            console.log(colors.fg.greenstrong,
+            console.log(colors.fg.bluestrong,
                 "\nFallen Store - Encontre seu periférico ideal aqui!")
             sobre()
             console.log(colors.reset, "")
