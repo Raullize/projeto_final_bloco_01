@@ -172,10 +172,9 @@ export function main() {
                     console.log("\nProduto encontrado:")
                     produtoApagar.visualizar()
                     
-                    console.log("\nTem certeza que deseja apagar este produto? (s/n):")
-                    let confirmacao = readlinesync.question("").toLowerCase()
+                    let confirmacao = readlinesync.keyInYNStrict("\nTem certeza que deseja apagar este produto?")
                     
-                    if (confirmacao === 's') {
+                    if (confirmacao) {
                         controller.deletar(idApagar)
                     } else {
                         console.log(colors.fg.yellow, "Operação cancelada. O produto não foi apagado.", colors.reset)
